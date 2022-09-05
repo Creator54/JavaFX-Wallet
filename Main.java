@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ public class Main extends Application{
     TextField username = new TextField("Jack");
     Button login = new Button("Login"), addBtn = new Button("Add Money"), subBtn = new Button("Withdraw Money"), transaction = new Button("Check Transactions");
     VBox vbox;
+    HBox hbox;
     Scene scene;
     username.setMaxWidth(200);
     addBtn.setVisible(false);
@@ -47,7 +49,7 @@ public class Main extends Application{
       @Override public void handle(ActionEvent e) {
         primaryStage.setTitle("Welcome " + username.getText());
         label.setText("Logged in User: " + username.getText());
-        balance.setText("Balance: " + money + "$");
+        balance.setText("Available Balance: " + money + "$");
         username.setText("10");
         login.setVisible(false);
         login.setManaged(false);
@@ -56,8 +58,10 @@ public class Main extends Application{
         transaction.setVisible(true);
       }
     });
-
-    vbox = new VBox(label, balance, username, login, addBtn, subBtn, transaction);
+    hbox = new HBox(addBtn,subBtn);
+    hbox.setSpacing(20);
+    hbox.setAlignment(Pos.CENTER);
+    vbox = new VBox(label, balance, username, login, hbox, transaction);
     vbox.setSpacing(20);
     vbox.setAlignment(Pos.CENTER);
     scene = new Scene(vbox, 400, 400);
