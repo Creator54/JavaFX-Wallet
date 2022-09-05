@@ -27,11 +27,12 @@ public class Main extends Application{
     balance.setStyle("-fx-font-size: 20;-fx-font-weight: bold");
     TextField username = new TextField("Jack");
     username.setStyle("-fx-font-size: 28");
-    Button login = new Button("Login"), addBtn = new Button("Add Money"), subBtn = new Button("Withdraw Money"), transaction = new Button("Check Transactions");
+    Button login = new Button("Login"), addBtn = new Button("Add Money"), subBtn = new Button("Withdraw Money"), transaction = new Button("Check Transactions"), exit = new Button("EXIT");
     login.setStyle("-fx-font-size: 20");
     addBtn.setStyle("-fx-font-size: 20");
     subBtn.setStyle("-fx-font-size: 20");
     transaction.setStyle("-fx-font-size: 20");
+    exit.setStyle("-fx-font-size: 20");
     VBox layoutUI;
     HBox changeBtns;
     Scene scene;
@@ -39,6 +40,7 @@ public class Main extends Application{
     addBtn.setVisible(false);
     subBtn.setVisible(false);
     transaction.setVisible(false);
+    exit.setVisible(false);
 
     addBtn.setOnAction(new EventHandler<ActionEvent>() {
       @Override public void handle(ActionEvent e){
@@ -49,6 +51,12 @@ public class Main extends Application{
     subBtn.setOnAction(new EventHandler<ActionEvent>() {
       @Override public void handle(ActionEvent e) {
         balance.setText("Balance: " + sub(Integer.parseInt(username.getText())) + "$");
+      }
+    });
+
+    exit.setOnAction(new EventHandler<ActionEvent>() {
+      @Override public void handle(ActionEvent e) {
+        System.exit(0);
       }
     });
 
@@ -63,12 +71,13 @@ public class Main extends Application{
         addBtn.setVisible(true);
         subBtn.setVisible(true);
         transaction.setVisible(true);
+        exit.setVisible(true);
       }
     });
     changeBtns = new HBox(addBtn,subBtn);
     changeBtns.setSpacing(20);
     changeBtns.setAlignment(Pos.CENTER);
-    layoutUI = new VBox(label, balance, username, login, changeBtns, transaction);
+    layoutUI = new VBox(label, balance, username, login, changeBtns, transaction, exit);
     layoutUI.setSpacing(20);
     layoutUI.setAlignment(Pos.CENTER);
     scene = new Scene(layoutUI, 400, 400);
