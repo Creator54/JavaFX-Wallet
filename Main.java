@@ -6,25 +6,33 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import java.util.Date;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ButtonBar.ButtonData;
 
 public class Main extends Application{
   int money=100;
   ListView<String> listView = new ListView<String>();
+  Dialog<String> dialog = new Dialog<String>();
 
-  public int sub(int num){
-    listView.getItems().add("Money Withdrawn: " + num + "$  " +  new Date());
-    return money-=num;
+  public int sub(int value){
+    if(money-value<0){
+      dialog.showAndWait();
+      return 0;
+    }
+    listView.getItems().add("Money Withdrawn: " + value + "$  " +  new Date());
+    return money-=value;
   }
 
-  public int add(int num){
-    listView.getItems().add("Money Deposited: " + num + "$  " + new Date());
-    return money+=num;
+  public int add(int value){
+    listView.getItems().add("Money Deposited: " + value + "$  " + new Date());
+    return money+=value;
   }
 
   @Override
@@ -51,6 +59,10 @@ public class Main extends Application{
     listView.setVisible(false);
     listView.setManaged(false);
     exit.setVisible(false);
+    dialog.setTitle("Error");
+    ButtonType type = new ButtonType("Understood !", ButtonData.OK_DONE);
+    dialog.setContentText("Money greated than available balance cannot be withdrawn !!");
+    dialog.getDialogPane().getButtonTypes().add(type);
 
     addBtn.setOnAction(new EventHandler<ActionEvent>() {
       @Override public void handle(ActionEvent e){
