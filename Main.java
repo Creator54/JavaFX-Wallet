@@ -22,10 +22,6 @@ public class Main extends Application{
   Dialog<String> dialog = new Dialog<String>();
 
   public int sub(int value){
-    if(money-value<0){
-      dialog.showAndWait();
-      return 0;
-    }
     listView.getItems().add("Money Withdrawn: " + value + "$  " +  new Date());
     return money-=value;
   }
@@ -72,7 +68,10 @@ public class Main extends Application{
 
     subBtn.setOnAction(new EventHandler<ActionEvent>() {
       @Override public void handle(ActionEvent e) {
-        balance.setText("Balance: " + sub(Integer.parseInt(username.getText())) + "$");
+        if(money-Integer.parseInt(username.getText())<0){
+          dialog.showAndWait();
+        }
+        else balance.setText("Balance: " + sub(Integer.parseInt(username.getText())) + "$");
       }
     });
 
