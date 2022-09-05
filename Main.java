@@ -21,14 +21,14 @@ public class Main extends Application{
   ListView<String> listView = new ListView<String>();
   Dialog<String> dialog = new Dialog<String>();
 
-  public int sub(int value){
-    listView.getItems().add("Money Withdrawn: " + value + "$  " +  new Date());
-    return money-=value;
+  public void sub(int value){
+    money-=value;
+    listView.getItems().add("Money Withdrawn: " + value + "$  " + "Current Balance: " + money + "$  " +  new Date());
   }
 
-  public int add(int value){
-    listView.getItems().add("Money Deposited: " + value + "$  " + new Date());
-    return money+=value;
+  public void add(int value){
+    money+=value;
+    listView.getItems().add("Money Deposited: " + value + "$  " + "Current Balance: " + money + "$  " + new Date());
   }
 
   @Override
@@ -54,6 +54,7 @@ public class Main extends Application{
     transaction.setVisible(false);
     listView.setVisible(false);
     listView.setManaged(false);
+    listView.getItems().add("Initial Deposit: " + money + "$  " +  new Date());
     exit.setVisible(false);
     dialog.setTitle("Error");
     ButtonType type = new ButtonType("Understood !", ButtonData.OK_DONE);
@@ -62,7 +63,8 @@ public class Main extends Application{
 
     addBtn.setOnAction(new EventHandler<ActionEvent>() {
       @Override public void handle(ActionEvent e){
-        balance.setText("Balance: " + add(Integer.parseInt(username.getText())) + "$");
+        add(Integer.parseInt(username.getText()));
+        balance.setText("Balance: " + money + "$");
       }
     });
 
@@ -71,7 +73,10 @@ public class Main extends Application{
         if(money-Integer.parseInt(username.getText())<0){
           dialog.showAndWait();
         }
-        else balance.setText("Balance: " + sub(Integer.parseInt(username.getText())) + "$");
+        else{
+          sub(Integer.parseInt(username.getText()));
+          balance.setText("Balance: " + money + "$");
+        }
       }
     });
 
