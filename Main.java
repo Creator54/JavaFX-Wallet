@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -80,8 +81,9 @@ public class Main extends Application{
     layoutUI = new VBox(label, balance, username, login, changeBtns, transaction, exit);
     layoutUI.setSpacing(20);
     layoutUI.setAlignment(Pos.CENTER);
+    layoutUI.setStyle("-fx-background-color: #81c483;");
     scene = new Scene(layoutUI, 400, 400);
-
+    scene.setFill(Color.web("#81c483"));
     primaryStage.setTitle("Wallet");
     primaryStage.setScene(scene);
     primaryStage.show();
