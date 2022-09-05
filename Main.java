@@ -11,33 +11,24 @@ import javafx.event.ActionEvent;
 
 public class Main extends Application{
   int money=100;
-  public int sub(int a){
-    return money-=a;
+  public int sub(int num){
+    return money-=num;
   }
 
-  public int add(int a){
-    return money+=a;
+  public int add(int num){
+    return money+=num;
   }
 
   @Override
   public void start(Stage primaryStage) {
-    Label label,balance;
-    TextField username;
-    Button login, addBtn, subBtn, transaction;
+    Label label = new Label("Login Details"), balance = new Label("");
+    TextField username = new TextField("Jack");
+    Button login = new Button("Login"), addBtn = new Button("Add Money"), subBtn = new Button("Withdraw Money"), transaction = new Button("Check Transactions");
     VBox vbox;
     Scene scene;
-
-    username = new TextField("Jack");
     username.setMaxWidth(200);
-
-    label = new Label("Login Details");
-    balance = new Label("");
-    login = new Button("Login");
-    addBtn = new Button("Add Money");
     addBtn.setVisible(false);
-    subBtn = new Button("Withdraw Money");
     subBtn.setVisible(false);
-    transaction = new Button("Check transactionions");
     transaction.setVisible(false);
 
     addBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -59,6 +50,7 @@ public class Main extends Application{
         balance.setText("Balance: " + money + "$");
         username.setText("10");
         login.setVisible(false);
+        login.setManaged(false);
         addBtn.setVisible(true);
         subBtn.setVisible(true);
         transaction.setVisible(true);
