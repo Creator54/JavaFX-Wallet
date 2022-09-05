@@ -23,10 +23,17 @@ public class Main extends Application{
   @Override
   public void start(Stage primaryStage) {
     Label label = new Label("Login Details"), balance = new Label("");
+    label.setStyle("-fx-font-size: 30;-fx-font-weight: bold");
+    balance.setStyle("-fx-font-size: 20;-fx-font-weight: bold");
     TextField username = new TextField("Jack");
+    username.setStyle("-fx-font-size: 28");
     Button login = new Button("Login"), addBtn = new Button("Add Money"), subBtn = new Button("Withdraw Money"), transaction = new Button("Check Transactions");
-    VBox vbox;
-    HBox hbox;
+    login.setStyle("-fx-font-size: 20");
+    addBtn.setStyle("-fx-font-size: 20");
+    subBtn.setStyle("-fx-font-size: 20");
+    transaction.setStyle("-fx-font-size: 20");
+    VBox layoutUI;
+    HBox changeBtns;
     Scene scene;
     username.setMaxWidth(200);
     addBtn.setVisible(false);
@@ -58,13 +65,13 @@ public class Main extends Application{
         transaction.setVisible(true);
       }
     });
-    hbox = new HBox(addBtn,subBtn);
-    hbox.setSpacing(20);
-    hbox.setAlignment(Pos.CENTER);
-    vbox = new VBox(label, balance, username, login, hbox, transaction);
-    vbox.setSpacing(20);
-    vbox.setAlignment(Pos.CENTER);
-    scene = new Scene(vbox, 400, 400);
+    changeBtns = new HBox(addBtn,subBtn);
+    changeBtns.setSpacing(20);
+    changeBtns.setAlignment(Pos.CENTER);
+    layoutUI = new VBox(label, balance, username, login, changeBtns, transaction);
+    layoutUI.setSpacing(20);
+    layoutUI.setAlignment(Pos.CENTER);
+    scene = new Scene(layoutUI, 400, 400);
 
     primaryStage.setTitle("Wallet");
     primaryStage.setScene(scene);
